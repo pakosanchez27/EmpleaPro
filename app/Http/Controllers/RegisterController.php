@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterController extends Controller 
+class RegisterController extends Controller
 {
     public function index()
     {
@@ -26,8 +26,7 @@ class RegisterController extends Controller
 
         return DB::transaction(function () use ($data) {
             $user = User::create([
-                'name' => $data['name'],
-                'last_name' =>$data['last_name'],
+                'name' => trim($data['name'] . ' ' . $data['last_name']),
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
                 'is_active' => true,
@@ -42,7 +41,7 @@ class RegisterController extends Controller
             // Enviar email
 
             event(new Registered($user));
-            
+
             Auth::login($user);
 
 
