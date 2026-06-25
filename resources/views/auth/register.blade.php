@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,15 @@
     <title>EmpleaPro Register</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="min-h-screen bg-fondo-principal text-fondo-secundario antialiased">
     <main class="grid min-h-screen p-3 lg:grid-cols-[0.9fr_1.1fr]">
         <section class="relative hidden overflow-hidden rounded-lg bg-fondo-secundario lg:block">
-            <img
-                src="{{ asset('img/register-hero.jpg') }}"
-                alt="Edificio corporativo moderno"
-                class="absolute inset-0 h-full w-full object-cover"
-            >
-            <div class="absolute inset-0 bg-gradient-to-b from-fondo-secundario/20 via-fondo-secundario/20 to-fondo-secundario/90"></div>
+            <img src="{{ asset('img/register-hero.jpg') }}" alt="Edificio corporativo moderno"
+                class="absolute inset-0 h-full w-full object-cover">
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-fondo-secundario/20 via-fondo-secundario/20 to-fondo-secundario/90">
+            </div>
 
             <div class="relative z-10 flex h-full flex-col justify-between p-8 text-blanco">
                 <a href="{{ url('/') }}" class="flex items-center gap-3">
@@ -53,57 +54,105 @@
                     </p>
                 </div>
 
-                <form class="space-y-4" method="POST" action="#">
+                <form class="space-y-4" method="POST" action="{{ route('register.store') }}" novalidate>
                     @csrf
 
                     <div>
-                        <label for="name" class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Nombre completo</label>
-                        <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            autocomplete="name"
-                            placeholder="Tu nombre"
-                            class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15"
-                        >
-                    </div>
-
-                    <div>
-                        <label for="email" class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Correo electronico</label>
-                        <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            autocomplete="email"
-                            placeholder="tu@email.com"
-                            class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15"
-                        >
-                    </div>
-
-                    <div>
-                        <label for="password" class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Contrasena</label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            autocomplete="new-password"
-                            placeholder="••••••••"
-                            class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15"
-                        >
-                    </div>
-
-                    <div class="flex items-center justify-between gap-4 pt-1">
-                        <label class="flex items-center gap-2 text-sm text-fondo-secundario/65">
-                            <input type="checkbox" class="h-4 w-4 rounded border-fondo-secundario/20 text-primario focus:ring-primario">
-                            Acepto los terminos
+                        <label for="name" class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Nombre
                         </label>
-                        <a href="{{ route('login') }}" class="text-sm font-semibold text-azul hover:text-primario">Ya tengo cuenta</a>
+                        <input 
+                        id="name" 
+                        name="name" 
+                        type="text" 
+                        autocomplete="name" 
+                        placeholder="Tu nombre"
+                        value="{{old('name')}}"
+                        class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15">
+                        @error('name')
+                            <p class="text-xs text-red-700 mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
-                    <button
-                        type="submit"
-                        class="w-full rounded-md bg-primario px-5 py-3 text-sm font-semibold text-blanco shadow-sm transition hover:bg-verde-claro hover:text-fondo-secundario focus:outline-none focus:ring-4 focus:ring-primario/20"
-                    >
+                    <div>
+                        <label for="last_name"
+                            class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Apellidos
+                        </label>
+                        <input 
+                        id="last_name" 
+                        name="last_name" 
+                        type="text" 
+                        autocomplete="last_name"
+                        placeholder="Tus apellidos"
+                        value="{{old('last_name')}}"
+                        class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15">
+                        @error('last_name')
+                            <p class="text-xs text-red-700 mt-2">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="email" class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Correo
+                            electronico</label>
+                        <input 
+                        id="email" 
+                        name="email" 
+                        type="email" 
+                        autocomplete="email"
+                        placeholder="tu@email.com"
+                        value="{{old('email')}}"
+                        class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15">
+                        @error('email')
+                            <p class="text-xs text-red-700 mt-2">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="password"
+                            class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Contrasena</label>
+                        <input 
+                        id="password" 
+                        name="password" 
+                        type="password" 
+                        autocomplete="new-password"
+                        placeholder="••••••••"
+                        class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15">
+                        @error('password')
+                            <p class="text-xs text-red-700 mt-2">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="password_confirmation"
+                            class="mb-1.5 block text-xs font-semibold text-fondo-secundario/70">Confirmar
+                            contrasena</label>
+                        <input 
+                        id="password_confirmation" 
+                        name="password_confirmation"
+                        type="password"
+                        autocomplete="new-password" placeholder="********"
+                        class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15">
+                    </div>
+
+                    <div class="pt-1">
+                        <div class="flex items-center justify-between gap-4">
+                            <label class="flex items-center gap-2 text-sm text-fondo-secundario/65">
+                                <input
+                                type="checkbox"
+                                name="terms"
+                                value="1"
+                                @checked(old('terms'))
+                                class="h-4 w-4 rounded border-fondo-secundario/20 text-primario focus:ring-primario">
+                                Acepto los terminos
+                            </label>
+                            <a href="{{ route('login') }}" class="text-sm font-semibold text-azul hover:text-primario">Ya
+                                tengo cuenta</a>
+                        </div>
+                        @error('terms')
+                            <p class="text-xs text-red-700 mt-2">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <button type="submit"
+                        class="w-full rounded-md bg-primario px-5 py-3 text-sm font-semibold text-blanco shadow-sm transition hover:bg-verde-claro hover:text-fondo-secundario focus:outline-none focus:ring-4 focus:ring-primario/20">
                         Registrarme
                     </button>
                 </form>
@@ -114,10 +163,8 @@
                     <span class="h-px flex-1 bg-fondo-secundario/10"></span>
                 </div>
 
-                <button
-                    type="button"
-                    class="flex w-full items-center justify-center gap-3 rounded-md bg-blanco px-5 py-3 text-sm font-semibold text-fondo-secundario shadow-sm ring-1 ring-fondo-secundario/10 transition hover:ring-primario/30"
-                >
+                <button type="button"
+                    class="flex w-full items-center justify-center gap-3 rounded-md bg-blanco px-5 py-3 text-sm font-semibold text-fondo-secundario shadow-sm ring-1 ring-fondo-secundario/10 transition hover:ring-primario/30">
                     <img class="w-6" src="{{ asset('img/google.svg') }}" alt=" logo de google">
                     Continuar con Google
                 </button>
@@ -129,4 +176,5 @@
         </section>
     </main>
 </body>
+
 </html>

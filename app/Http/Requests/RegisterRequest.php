@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
@@ -25,11 +25,14 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => ['required'],
+            'last_name' =>['required'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Password::
-                                                            min(8)
-                                                            ->letters()
-                                                            ->numbers()],
+            'password' => ['required', 'confirmed', Password::min(8)
+                                                            // ->letters()
+                                                            // ->numbers()
+                                                            ],
+            'terms' => ['accepted'],
+            
         ];
     }
 
@@ -37,7 +40,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'last_name.required' => 'El nombre es obligatorio.',
 
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico no tiene un formato válido.',
@@ -45,6 +48,7 @@ class RegisterRequest extends FormRequest
 
             'password.required' => 'La contraseña es obligatoria.',
             'password.confirmed' => 'La confirmación de contraseña no coincide.',
+            'terms.accepted' => 'Debes aceptar los términos y condiciones.',
         ];
     }
 }
