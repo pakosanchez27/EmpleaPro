@@ -56,5 +56,20 @@ Route::prefix('candidato')->group(function () {
     Route::post('/onboarding/fase-3', [CandidatoController::class, 'storeFase3PreferenciasLaborales'])
         ->middleware(['auth', 'verified'])
         ->name('candidato.onboarding.fase3.store');
+    Route::get('/onboarding/fase-4', [CandidatoController::class, 'fase4ExperienciaEducacion'])
+        ->middleware(['auth', 'verified'])
+        ->name('candidato.onboarding.fase4');
+    Route::post('/onboarding/fase-4', [CandidatoController::class, 'storeFase4ExperienciaEducacion'])
+        ->middleware(['auth', 'verified'])
+        ->name('candidato.onboarding.fase4.store');
+    Route::get('/onboarding/fase-5', [CandidatoController::class, 'fase5CvFinalizacion'])
+        ->middleware(['auth', 'verified'])
+        ->name('candidato.onboarding.fase5');
+    Route::post('/onboarding/fase-5', [CandidatoController::class, 'storeFase5CvFinalizacion'])
+        ->middleware(['auth', 'verified'])
+        ->name('candidato.onboarding.fase5.store');
+    Route::patch('/perfil/contacto', [CandidatoController::class, 'updateDatosContacto'])
+        ->middleware(['auth', 'verified'])
+        ->name('candidato.contacto.update');
 
 });

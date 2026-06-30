@@ -83,7 +83,7 @@
                                 type="text"
                                 autocomplete="given-name"
                                 placeholder="Tus nombres"
-                                value="{{ old('name', auth()->user()?->name) }}"
+                                value="{{ old('name', $firstName) }}"
                                 class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition placeholder:text-fondo-secundario/35 focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15">
                             @error('name')
                                 <p class="mt-2 text-xs text-red-700">{{ $message }}</p>
@@ -100,7 +100,7 @@
                                 type="text"
                                 autocomplete="family-name"
                                 placeholder="Tus apellidos"
-                                value="{{ old('last_name') }}"
+                                value="{{ old('last_name', $lastName) }}"
                                 class="w-full rounded-md border border-fondo-secundario/10 bg-fondo-campo px-4 py-3 text-sm text-fondo-secundario outline-none transition placeholder:text-fondo-secundario/35 focus:border-primario focus:bg-blanco focus:ring-4 focus:ring-primario/15">
                             @error('last_name')
                                 <p class="mt-2 text-xs text-red-700">{{ $message }}</p>

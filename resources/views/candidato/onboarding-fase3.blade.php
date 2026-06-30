@@ -175,7 +175,7 @@
                             <button
                                 type="submit"
                                 class="rounded-md bg-primario px-6 py-3 text-sm font-semibold text-blanco shadow-sm transition hover:bg-verde-claro hover:text-fondo-secundario focus:outline-none focus:ring-4 focus:ring-primario/20">
-                                Finalizar onboarding
+                                Continuar
                             </button>
                         </div>
                     </form>

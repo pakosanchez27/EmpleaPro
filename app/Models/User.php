@@ -139,6 +139,15 @@ class User extends Authenticatable implements MustVerifyEmail
             return 'candidato.onboarding.fase3';
         }
 
+        if ($this->perfilCandidato->experiences()->doesntExist()
+            || $this->perfilCandidato->educations()->doesntExist()) {
+            return 'candidato.onboarding.fase4';
+        }
+
+        if (! $this->perfilCandidato->is_completed) {
+            return 'candidato.onboarding.fase5';
+        }
+
         return null;
     }
 }

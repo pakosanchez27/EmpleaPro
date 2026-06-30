@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
@@ -50,5 +51,15 @@ class PerfilCandidato extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function experiences(): HasMany
+    {
+        return $this->hasMany(CandidateExperience::class, 'candidate_profile_id');
+    }
+
+    public function educations(): HasMany
+    {
+        return $this->hasMany(CandidateEducation::class, 'candidate_profile_id');
     }
 }
